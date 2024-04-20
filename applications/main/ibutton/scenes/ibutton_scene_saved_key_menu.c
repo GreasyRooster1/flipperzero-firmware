@@ -21,16 +21,12 @@ void ibutton_scene_saved_key_menu_on_enter(void* context) {
 
     if(features & iButtonProtocolFeatureWriteBlank) {
         submenu_add_item(
-            submenu, "Write ID", SubmenuIndexWriteBlank, ibutton_submenu_callback, ibutton);
+            submenu, "Write Blank", SubmenuIndexWriteBlank, ibutton_submenu_callback, ibutton);
     }
 
     if(features & iButtonProtocolFeatureWriteCopy) {
         submenu_add_item(
-            submenu,
-            "Full Write on Same Type",
-            SubmenuIndexWriteCopy,
-            ibutton_submenu_callback,
-            ibutton);
+            submenu, "Write Copy", SubmenuIndexWriteCopy, ibutton_submenu_callback, ibutton);
     }
 
     submenu_add_item(submenu, "Edit", SubmenuIndexEdit, ibutton_submenu_callback, ibutton);

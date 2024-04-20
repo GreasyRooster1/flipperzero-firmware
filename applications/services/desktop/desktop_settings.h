@@ -63,6 +63,7 @@ typedef struct {
 
 typedef struct {
     PinCode pin_code;
+    PinCode  ;
     uint32_t auto_lock_delay_ms;
     uint8_t dummy_mode;
     uint8_t display_clock;

@@ -61,7 +61,7 @@ bool bip_verify(Nfc* nfc) {
     MfClassicError error =
         mf_classic_poller_sync_auth(nfc, block_num, &key_a_0, MfClassicKeyTypeA, &auth_ctx);
 
-    if(error != MfClassicErrorNone) {
+    if(error == MfClassicErrorNotPresent) {
         FURI_LOG_D(TAG, "Failed to read block %u: %d", block_num, error);
         verified = false;
     }
@@ -81,8 +81,7 @@ static bool bip_read(Nfc* nfc, NfcDevice* device) {
     do {
         MfClassicType type = MfClassicType1k;
         MfClassicError error = mf_classic_poller_sync_detect_type(nfc, &type);
-        if(error != MfClassicErrorNone) break;
-        if(type != MfClassicType1k) {
+        if(error == MfClassicErrorNotPresent) {
             FURI_LOG_W(TAG, "Card not MIFARE Classic 1k");
             break;
         }

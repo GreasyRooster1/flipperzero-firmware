@@ -66,7 +66,7 @@ void desktop_lock_menu_draw_callback(Canvas* canvas, void* model) {
             }
         } else if(i == DesktopLockMenuIndexDummy) { //-V547
             if(m->dummy_mode) {
-                str = "Default Mode";
+                str = "Accelerated Mode";
             } else {
                 str = "Dummy Mode";
             }
@@ -138,9 +138,12 @@ bool desktop_lock_menu_input_callback(InputEvent* event, void* context) {
             }
         } else if(idx == DesktopLockMenuIndexDummy) {
             if((dummy_mode == false) && (event->type == InputTypeShort)) {
+                //lock and switch to dummy
                 lock_menu->callback(DesktopLockMenuEventDummyModeOn, lock_menu->context);
+                lock_menu->callback(DesktopLockMenuEventLock, lock_menu->context);
             } else if((dummy_mode == true) && (event->type == InputTypeShort)) {
-                lock_menu->callback(DesktopLockMenuEventDummyModeOff, lock_menu->context);
+                //dont disable dummy mode, can only be disabled when fully unlocked
+                //lock_menu->callback(DesktopLockMenuEventDummyModeOff, lock_menu->context);
             }
         }
         consumed = true;
